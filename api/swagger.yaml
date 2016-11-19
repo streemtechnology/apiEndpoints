@@ -1,0 +1,64 @@
+---
+swagger: "2.0"
+info:
+  description: "#### Encode your videos using Streem technology \n"
+  version: "1.0.0"
+  title: "Streem Technology"
+host: "streem.technology"
+basePath: "/"
+schemes:
+- "http"
+paths:
+  /encode:
+    post:
+      summary: "Encoding endpoint"
+      description: "Submit your videos for encoding using this endpoint. The videos\
+        \ are encoded using"
+      operationId: "encodePOST"
+      parameters:
+      - name: "fps"
+        in: "formData"
+        description: "frames per second"
+        required: true
+        type: "string"
+      - name: "bitrate"
+        in: "formData"
+        description: "bitrate for encoding video"
+        required: true
+        type: "string"
+      - name: "cubic"
+        in: "formData"
+        description: "Cube mapped video following facebook spec"
+        required: true
+        type: "boolean"
+      - name: "s3Upload"
+        in: "formData"
+        description: "Auto upload to a specified Amazon S3 bucket. Allow write access\
+          \ to the bucket."
+        required: false
+        type: "string"
+      - name: "codec"
+        in: "formData"
+        description: "Specify the codec for encoding. Supported values - [vp9, h.264]"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "ID of the video submitted if the job has been successfully\
+            \ submitted. If the job submission fails, a response error code is returned."
+      x-swagger-router-controller: "Default"
+  /status/poll/{id}:
+    get:
+      summary: "Status check on the submitted encoding job"
+      operationId: "statusPollIdGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Returns a message if the job is still pending or has finished"
+      x-swagger-router-controller: "Default"
+definitions: {}
