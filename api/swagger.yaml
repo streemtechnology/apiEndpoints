@@ -13,7 +13,8 @@ paths:
     post:
       summary: "Encoding endpoint"
       description: "Submit your videos for encoding using this endpoint. The videos\
-        \ are encoded using"
+        \ are encoded using FFmpeg and uploaded to an Amazon S3 bucket specified with\
+        \ this call."
       operationId: "encodePOST"
       parameters:
       - name: "fps"
@@ -40,8 +41,13 @@ paths:
       - name: "codec"
         in: "formData"
         description: "Specify the codec for encoding. Supported values - [vp9, h.264]"
-        required: false
+        required: true
         type: "string"
+      - name: "video"
+        in: "formData"
+        description: "video file to encode"
+        required: true
+        type: "file"
       responses:
         200:
           description: "ID of the video submitted if the job has been successfully\

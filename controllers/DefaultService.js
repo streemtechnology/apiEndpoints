@@ -6,8 +6,9 @@ exports.encodePOST = function(args, res, next) {
   * fps (String)
   * bitrate (String)
   * cubic (Boolean)
-  * s3Upload (String)
   * codec (String)
+  * video (file)
+  * s3Upload (String)
   **/
   // no response value expected for this operation
   res.end();
